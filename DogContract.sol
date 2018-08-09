@@ -1,6 +1,8 @@
 pragma solidity^0.4.0;
 
-contract DogContract{
+import "./Ownable.sol";
+
+contract DogContract is Ownable{
     
     struct Dog{
         string name;
@@ -10,10 +12,13 @@ contract DogContract{
     Dog[] dogs;
     mapping(address => uint) ownerToDog;
     
+    event addedDog(address owner, string name, uint dogId);
+    
     function addDog(string _name, uint _age) internal {
         address owner = msg.sender;
         uint id = dogs.push(Dog(_name, _age));
         ownerToDog[owner] = id;
+        addedDog(owner, _name, id);
     }
     
     function getDog() returns (string){
