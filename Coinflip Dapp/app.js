@@ -46,6 +46,7 @@
         instance.getLastFlip(accounts[0], function(error, result){
             if(result){
                 $("#result").html("You won!");
+                alert("YOU WON!");
             }
             else{
                 $("#result").html("You lost!");
